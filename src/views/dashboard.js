@@ -52,6 +52,62 @@ export function render(state) {
         </header>
 
         <div class="dashboard-grid">
+          <!-- Live Pollution Score -->
+          <div class="card glass" style="grid-column: span 2;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h3>Live Pollution Score</h3>
+              <span id="live-risk-badge" style="
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                background: #e2e8f0;
+                color: #333;
+              ">Waiting...</span>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:1rem;">
+              <div class="stat-card card glass">
+                <div class="stat-info">
+                  <p class="stat-label">Pollution Score</p>
+                  <h3 class="stat-value" id="live-pollution-score">--</h3>
+                </div>
+              </div>
+              <div class="stat-card card glass">
+                <div class="stat-info">
+                  <p class="stat-label">Combustion Score</p>
+                  <h3 class="stat-value" id="live-combustion-score">--</h3>
+                </div>
+              </div>
+              <div class="stat-card card glass">
+                <div class="stat-info">
+                  <p class="stat-label">AfterTreatment Score</p>
+                  <h3 class="stat-value" id="live-aftertreatment-score">--</h3>
+                </div>
+              </div>
+              <div class="stat-card card glass">
+                <div class="stat-info">
+                  <p class="stat-label">Fuel Trim Score</p>
+                  <h3 class="stat-value" id="live-fuel-trim">--</h3>
+                </div>
+              </div>
+              <div class="stat-card card glass">
+                <div class="stat-info">
+                  <p class="stat-label">Lambda Stability</p>
+                  <h3 class="stat-value" id="live-lambda">--</h3>
+                </div>
+              </div>
+              <div class="stat-card card glass">
+                <div class="stat-info">
+                  <p class="stat-label">Catalyst Efficiency</p>
+                  <h3 class="stat-value" id="live-catalyst">--</h3>
+                </div>
+              </div>
+            </div>
+            <p style="margin-top:1rem; font-size:0.75rem; color:var(--color-text-muted);">
+              Last updated: <span id="live-timestamp">--</span>
+            </p>
+          </div>
+          
           <!-- Carbon Ring -->
           <div class="card glass carbon-ring-card">
             <h3>Monthly Emissions</h3>
