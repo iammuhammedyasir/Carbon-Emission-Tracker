@@ -8,6 +8,7 @@ Install:
   pip install paho-mqtt requests
 """
 
+from http import client
 import json
 import requests
 import paho.mqtt.client as mqtt
@@ -15,13 +16,14 @@ import paho.mqtt.client as mqtt
 # ─────────────────────────────────────────────
 # CONFIG — replace with your actual values
 # ─────────────────────────────────────────────
-SUPABASE_URL  = "YOUR_SUPABASE_URL"       # e.g. https://xyzxyz.supabase.co
-SUPABASE_KEY  = "YOUR_SUPABASE_ANON_KEY"  # anon public key
+SUPABASE_URL  = "https://xhqbdwkxgzslrkydeahm.supabase.co"
+SUPABASE_KEY  = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhocWJkd2t4Z3pzbHJreWRlYWhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyNjA3OTAsImV4cCI6MjA4NzgzNjc5MH0.oAOhwkYNB-9xv-802ZWqeFqarnUDJVY3_sZFfuBUsQE"
 
-MQTT_BROKER   = "localhost"               # HiveMQ on this laptop
-MQTT_PORT     = 1883
-MQTT_TOPIC    = "results/data"
-# ─────────────────────────────────────────────
+MQTT_BROKER   = "a769917024e3407dbcacc8ee92e680d4.s1.eu.hivemq.cloud"
+MQTT_PORT     = 8883
+MQTT_USERNAME = "carbon04"
+MQTT_PASSWORD = "Carbon04"
+MQTT_TOPIC    = "results/data"   # ← ADD THIS LINE
 
 # Supabase REST endpoint for the results table
 SUPABASE_ENDPOINT = f"{SUPABASE_URL}/rest/v1/results"
@@ -98,6 +100,8 @@ def on_disconnect(client, userdata, rc):
 
 def main():
     client = mqtt.Client()
+    client.username_pw_set(MQTT_USERNAME, MQTT_PASSWORD)
+    client.tls_set()  # required for port 8883
     client.on_connect    = on_connect
     client.on_message    = on_message
     client.on_disconnect = on_disconnect
