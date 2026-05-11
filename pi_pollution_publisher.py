@@ -12,8 +12,10 @@ import paho.mqtt.client as mqtt   # pip install paho-mqtt
 # ─────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────
-MQTT_BROKER = "broker.hivemq.com"   # ← change from "192.168.1.XX"
-MQTT_PORT        = 1883
+MQTT_BROKER   = "a769917024e3407dbcacc8ee92e680d4.s1.eu.hivemq.cloud"
+MQTT_PORT     = 8883
+MQTT_USERNAME = "carbon"
+MQTT_PASSWORD = "Carbon04"  # your actual password
 MQTT_TOPIC       = "results/data"
 
 SERIAL_PORT      = "/dev/rfcomm0"   # ← your OBD adapter port on Pi
@@ -294,7 +296,9 @@ def read_loop(ser, mqtt_client, vehicle_type):
 def main():
     # Connect to HiveMQ broker
     mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-    mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
+mqtt_client.username_pw_set(MQTT_USERNAME, MQTT_PASSWORD)
+mqtt_client.tls_set()  # required for port 8883
+mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
     mqtt_client.loop_start()
     print(f"✅ MQTT connected to {MQTT_BROKER}:{MQTT_PORT}")
 
